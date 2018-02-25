@@ -1,7 +1,6 @@
 import os                                                                                                                                                 
 import logging                                                                                                                                            
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'                                                                                                                  
-                                                                                                                                                          
 import pandas as pd                                                                                                                                       
 import keras as K                                                                                                                                         
 import parquet as pq                                                                                                                                      
