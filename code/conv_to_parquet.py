@@ -32,10 +32,10 @@ class packer(object):
         drop_list = []
 
 	if len(self.cols) != len(self.col_types) or len(self.cols) == 0 or len(self.col_types) == 0:
-            raise ValueError
+            raise Exception("Length of col_list and col_types are either 0 or they do not match")
 
         if len(self.nan_list) != len(self.nan_list_types):
-            raise ValueError
+            raise Exception("Length of nan_list and nan_list_types do not match")
 
         df = pd.read_csv(self.fname)
 
@@ -49,13 +49,13 @@ class packer(object):
             temp = df[df[col].isnull()]
             if len(temp) != 0:
                 if col not in self.nan_list:
-                    print (col, ' Has NULL ENTRIES. ADD to nan_list')
+                    raise Exception(col, ' Has NULL ENTRIES. ADD to nan_list')
 
         if self.drop_nan == True:
             if self.index_col not in self.nan_list:
                 df = df.dropna(subset = self.nan_list, axis = 1)
             else:
-                raise ValueError
+                raise Exception('Index Column contains NAN values')
 
         if self.drop_nan == False and len(self.nan_list) != 0:
             for i in range(0, len(self.nan_list)):
@@ -76,6 +76,6 @@ class packer(object):
 #D.fname = 'toy_dx.txt'
 #D.index_col = 'MASKED_REG_NO'
 #D.cols = ['FACILITY_CONCEPT_ID', 'MASKED_REFERENCE_NO', 'SEQUENCE_NO', 'ICDX_DIAGNOSIS_CODE', 'ICDX_VERSION_NO']
-#D.col_types = ['int64','int64','int64','str','str']
+#D.col_types = ['int64','int64','int64','str', 'str']
 #D.out_fname = 'op_pq_file.txt'
 #D.pack_to_parquet()
