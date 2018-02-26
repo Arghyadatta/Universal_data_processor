@@ -6,15 +6,25 @@ from scipy.sparse import csr_matrix
 import itertools
 
 
-def to_list(A):
-    return [A] if type(A) != list else A
+def as_list(A):
+    if type(A) is list: return A
+    
+    elif type(A) is tuple:
+        temp = []
+        for i in A:
+            temp.append(i)
+        return temp
+    elif type(A) == str:
+        return [A] 
 
 def strip_col(df, cols):
-    df.loc[:,col] = df[col].str.strip() for c in to_list(cols)
+    for col in as_list(cols):
+        df.loc[:,col] = df[col].str.strip()
     return df
 
-def to_lower(df, cols):
-    df.loc[:,c] = df[c].str.lower() for c in to_list(cols)
+def as_lower(df, cols):
+    for col in to_list(cols):
+        df.loc[:,c] = df[c].str.lower()
     return df
 
 def list_unroller(df,col):
@@ -23,7 +33,7 @@ def list_unroller(df,col):
 
 def mapper(df, index_col, extra_columns = [], count_name = "COUNT", strip = True):
 
-    index_col = to_list(index_col)
+    index_col = as_list(index_col)
 
     if strip: strip_col(df, index_col)
 
@@ -46,4 +56,6 @@ def get_val(index, df,col, mode = 'NAN'):
             return np.nan
         elif mode == 'ONE':
             return 1
+        elif mode == 'ZERO':
+            return 0
 
