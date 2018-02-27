@@ -6,11 +6,17 @@ import keras as K
 import parquet as pq
 import tensorflow as tf
 import numpy as np
-import pleras as pl                                                                                           from IPython import embed as breakpoint
+import pleras as pl
+from IPython import embed as breakpoint
+import os
+from scipy.sparse import csr_matrix
+import itertools
+from df_processes import *
 def interactive_debugger():
     from IPython.core import ultratb
     sys.excepthook = ultratb.FormattedTB(mode='Verbose',
-    color_scheme='Linux', call_pdb=1)                                                                         pd.set_option('expand_frame_repr', False)
+    color_scheme='Linux', call_pdb=1)
+pd.set_option('expand_frame_repr', False)
 pd.set_option('display.float_format', lambda x: '%.5f' % x)
 pd.set_option('display.max_colwidth', 100)
 FORMAT = '%(asctime)s %(levelname)-5s: %(message)s'

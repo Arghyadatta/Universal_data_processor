@@ -1,16 +1,10 @@
-
 from common import *
 
-import os
-
-from scipy.sparse import csr_matrix
-import itertools
-
 class BaseProcessor(object):
-    name = None
-    keys = []
-    extra = []
-    destination = []
+    name = "name"
+    keys = None
+    extra = None
+    destination = None
     fname = None
 
     def __init__(self, **kwargs):
@@ -34,10 +28,10 @@ class BaseProcessor(object):
         pq.write_parquet(processed, file)
 
 class SparseBaseProcessor(RawProcessor):
-    name = None
-    keys = []
-    extra = []
-    destination = []
+    name = "name"
+    keys = None
+    extra = None
+    destination = None
     fname = None
 
     def process(self, data):
@@ -50,11 +44,8 @@ class SparseBaseProcessor(RawProcessor):
         data = self.read(base)
         log.info("processing %s ..." % data_file)
         data = self.process(data)
-        print data[0]
-        print data[1]
         self.write(data_file, code_file, data)
 
     def write(self, data_file, code_file, processed):
         pq.write_parquet(processed[0], data_file)
         pq.write_parquet(processed[1], code_file)
-
