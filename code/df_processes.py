@@ -8,13 +8,12 @@ import itertools
 
 def as_list(A):
     if type(A) is list: return A
-    
     elif type(A) is tuple:
         temp = []
         for i in A:
             temp.append(i)
         return temp
-    elif type(A) == str:
+    elif type(A) is str:
         return [A] 
 
 def strip_col(df, cols):
@@ -24,7 +23,7 @@ def strip_col(df, cols):
 
 def as_lower(df, cols):
     for col in to_list(cols):
-        df.loc[:,c] = df[c].str.lower()
+        df.loc[:,col] = df[col].str.lower()
     return df
 
 def list_unroller(df,col):
@@ -58,4 +57,3 @@ def get_val(index, df,col, mode = 'NAN'):
             return 1
         elif mode == 'ZERO':
             return 0
-
