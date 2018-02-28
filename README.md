@@ -30,17 +30,23 @@ This function is a gateway to convert any CSV file into a parquet file following
 
 Inputs to be provided by the User:
 
-Parameters to be provided:
------------------------------------------------------------------------------------------------------------------------------
-fname = CSV file to be processed, path as a string
+Parameters to be provided
+
+fname = CSV file to be processed and path as a string
+
 index_col = Column name to be indexed (Student ID in this case)
+
 cols = Columns to be kept in the output parquet file, in the form of a python list
+
 col_types = Column types of the cols to be kept in the parquet file, in the form of a python list
+
 out_fname = Ouput file name, path as a string
+
 nan_list = [] Columns that are supposed to have nan_list, in the form of a python list
+
 nan_list_types = [] Column types of the columns in the nan_list, in the form of a python list
+
 drop_nan = Default is False, if set to True, it drops all the rows with NAN values, if False, then it keeps all the rows with NAN values
------------------------------------------------------------------------------------------------------------------------------
 
 A CSV file containing the headers : In the form of a string
 Column names that the user needs to keep in the generated parquet file : In the form of a list
