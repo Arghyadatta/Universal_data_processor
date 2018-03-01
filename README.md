@@ -1,5 +1,5 @@
 # Universal_Data_Processor 
-Note: This project is in Under-Development
+Note: This project is in Under-Development. A Use case with a dataset will be posted soon.
 
 **This is an attempt to write an Universal Data Preprocessor using Python, Pandas, Numpy and Scipy. The data strorage part has been implemented using Apache Parquet which is based on HDFS.**
 
@@ -26,7 +26,8 @@ _Let us consider a toy-dataset with the particular data-structure:_
 - student_weight: float64
 
 **Files:**
-_conv_to_parquet_
+
+**conv_to_parquet**
 
 This function is a gateway to convert any CSV file into a parquet file following certain guidelines.
 
@@ -45,3 +46,13 @@ Inputs to be provided by the User:
 - column types of the columns that the user wants to keep: In the form of a list
 
 [Note: Please make sure that the index of a column in the column names list and its datatype in the column types list should match]
+
+**df_processes**
+
+This py file contains basic dataframe mainipulation techniques that are being used by data processors and readers.
+
+- as_list --> Takes in data of type strings, tuples and returns a list item
+- strip col --> Takes in a dataframe with required columns and strips the columns of any trailing spaces
+- as_lower --> Takes in a dataframe with columns and converts the strings to lower-cases
+- mapper --> takes in a column of a certain type and replaces a column values with its integer mapping. Returns modified dataframe and mapping file
+
