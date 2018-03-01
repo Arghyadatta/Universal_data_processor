@@ -1,7 +1,7 @@
 # Universal_Data_Processor 
 Note: This project is in Under-Development
 
-## This is an attempt to write an Universal Data Preprocessor using Python, Pandas, Numpy and Scipy. The data strorage part has been implemented using Apache Parquet which is based on HDFS.
+**This is an attempt to write an Universal Data Preprocessor using Python, Pandas, Numpy and Scipy. The data strorage part has been implemented using Apache Parquet which is based on HDFS.**
 
 _Pre-requisite Packages:_
 
