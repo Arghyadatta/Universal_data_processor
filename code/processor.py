@@ -80,10 +80,52 @@ class MapperProcessorByDate(MapperProcessor):
 
     def process(self,data):
         dates = pq.read_parquet(self.src_data_file)
-        data[self.src_date_col] = data.index.map(lambda x: get_value(x, dates, self.src.data_col))
+        data[self.src_date_col] = data.index.map(lambda x: get_value(x, dates, self.src.data_col, 'NAN'))
         data['DAYS'] = (data[self.src_date_col] - data[self.data_date_col]).dt.days
         data = data[data.DAYS > -1]
         data.DAYS = data.DAYS + 1
         super(MapperProcessorByDate, self).process(data)
+
+class DataProcessorTimeSeries(SparseRawProcessor):
+
+    baselines = None
+    select = False
+    select_col = None
+    select_col_vals = None
+
+    date_file = None
+    date_file_flag = False
+    date_file_col = None
+    date_fixed_col = None
+
+    date_event_col = None
+
+    date_map_index = None
+
+    def process(self,data):
+        if self.select is True: if len(self.select_col) > 1 and len(self.select_col_vals) > 1: if len(self.select_col) == len(self.select_col_vals):
+            for i in range (0,len(self.select_col)):
+                data = data[data[self.select_col[i]].str.contains('|'.join(self.select_col_vals[i]))].copy()
+        if self.date_file_flag = True:
+            dates = pq.read_parquet(self.date_file)
+            data[self.data_file_col] = data[self.date_map_index].map(lambda x: get_value(x, dates, self.date_file_col, 'NAN'))
+            data['DAY_OF_EVENT'] = (data[self.date_event_col] - date[self.date_file_col])dt.days + 1
+        else:
+            data['DAY_OF_EVENT'] = (data[self.date_event_col] - date[self.date_fixed_col])dt.days + 1
+        df, code = dfp.mapper(data, self.src_map_key, extra_columns=self.extra)
+        df = df.to_frame().rename(columns = {0: self.name})
+        data = pd.concat([df, data], axis = 1)
+        data.sort_values("DAY_OF_EVENT", inplace = True)
+        df = []
+        for col in data.columns:
+            df.append(data.groupby(level=0)[col].apply(list).to_frame())
+        data = pd.concat(df, axis = 1)
+        return data, code
+
+def process():
+    pass
+
+if __name__ = "main":
+    process()
 
 
