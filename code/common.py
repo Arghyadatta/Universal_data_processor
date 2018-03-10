@@ -1,6 +1,7 @@
 import os
 import logging
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
 import pandas as pd
 import keras as K
 import parquet as pq
@@ -12,6 +13,10 @@ import os
 from scipy.sparse import csr_matrix
 import itertools
 from df_processes import *
+
+import parquet as pq
+import df_processes as dfp
+
 def interactive_debugger():
     from IPython.core import ultratb
     sys.excepthook = ultratb.FormattedTB(mode='Verbose',
