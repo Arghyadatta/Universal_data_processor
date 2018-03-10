@@ -49,7 +49,7 @@ Inputs to be provided by the User:
 
 **df_processes**
 
-This py file contains basic dataframe mainipulation techniques that are being used by data processors and readers.
+This .py file contains basic dataframe mainipulation techniques that are being used by data processors and readers.
 
 - as_list --> Takes in data of type strings, tuples and returns a list item
 - strip col --> Takes in a dataframe with required columns and strips the columns of any trailing spaces
