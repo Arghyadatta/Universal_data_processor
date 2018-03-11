@@ -7,7 +7,6 @@ import keras as K
 import parquet as pq
 import tensorflow as tf
 import numpy as np
-import pleras as pl
 from IPython import embed as breakpoint
 import os
 from scipy.sparse import csr_matrix
